@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:movie_app_clean_architecture/core/error/exception.dart';
 import 'package:movie_app_clean_architecture/movies/data/models/movie_model.dart';
+
+import '../../../core/network/error_message_model.dart';
 
 class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies() async {
@@ -14,7 +17,7 @@ class MovieRemoteDataSource {
             .toList(),
       );
     } else {
-      return [];
+      throw ServerException(ErrorMessageModel.fromJson(response.data));
     }
   }
 }
