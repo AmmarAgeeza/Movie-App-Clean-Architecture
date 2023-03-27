@@ -7,4 +7,7 @@ class APIConstants {
       '${baseUrl}movie/popular?api_key=$apiKey';
   static const String topRatedEndPoint =
       '${baseUrl}movie/top_rated?api_key=$apiKey';
+  static const String baseImageUrl =
+      'https://image.tmdb.org/t/p/w500';
+      static String imageUrl(String path)=>'$baseImageUrl$path';
 }

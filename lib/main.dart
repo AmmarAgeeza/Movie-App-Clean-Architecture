@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Movies App',
       
-      home: MoviesScreen(),
+      home: MainMoviesScreen(),
     );
   }
 }
