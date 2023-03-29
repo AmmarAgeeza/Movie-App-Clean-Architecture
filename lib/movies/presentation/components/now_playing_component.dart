@@ -2,16 +2,33 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/network/api_constants.dart';
-import '../../../core/utils/dummy.dart';
+import '../../../core/utils/enums.dart';
+import '../controller/movies_bloc.dart';
+import '../controller/movies_state.dart';
 
 class NowPlayingComponent extends StatelessWidget {
   const NowPlayingComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FadeIn(
+    return BlocBuilder<MoviesBloc, MoviesState>(
+      builder: (context, state) {
+        switch (state.nowPlayingState) {
+          case RequestState.loading:
+            return const SizedBox(
+              height: 400,
+              child: Center(child: CircularProgressIndicator()),
+            );
+          case RequestState.error:
+            return SizedBox(
+              height: 400,
+              child: Center(child: Text(state.message)),
+            );
+          case RequestState.loaded:
+            return FadeIn(
               duration: const Duration(milliseconds: 500),
               child: CarouselSlider(
                 options: CarouselOptions(
@@ -19,7 +36,7 @@ class NowPlayingComponent extends StatelessWidget {
                   viewportFraction: 1.0,
                   onPageChanged: (index, reason) {},
                 ),
-                items: moviesList.map(
+                items: state.nowPlayingMovies.map(
                   (item) {
                     return GestureDetector(
                       key: const Key('openMovieMinimalDetail'),
@@ -48,7 +65,8 @@ class NowPlayingComponent extends StatelessWidget {
                             blendMode: BlendMode.dstIn,
                             child: CachedNetworkImage(
                               height: 560.0,
-                              imageUrl: APIConstants.imageUrl(item.backdropPath),
+                              imageUrl:
+                                  APIConstants.imageUrl(item.backdropPath),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -72,6 +90,7 @@ class NowPlayingComponent extends StatelessWidget {
                                         'Now Playing'.toUpperCase(),
                                         style: const TextStyle(
                                           fontSize: 16.0,
+                                          color: Colors.white
                                         ),
                                       ),
                                     ],
@@ -84,6 +103,8 @@ class NowPlayingComponent extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                       fontSize: 24,
+                                                                                color: Colors.white
+
                                     ),
                                   ),
                                 ),
@@ -97,5 +118,8 @@ class NowPlayingComponent extends StatelessWidget {
                 ).toList(),
               ),
             );
+        }
+      },
+    );
   }
 }
