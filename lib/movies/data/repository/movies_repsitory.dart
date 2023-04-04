@@ -22,7 +22,7 @@ class MovieRepository extends BaseMovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getPopularMovies() async {
-    final result = await baseMovieRemoteDataSource.getNowPlayingMovies();
+    final result = await baseMovieRemoteDataSource.getPopularMovies();
     try {
       return Right(result);
     } on ServerException catch (failure) {
@@ -32,7 +32,7 @@ class MovieRepository extends BaseMovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getTopRatedMovies() async {
-    final result = await baseMovieRemoteDataSource.getNowPlayingMovies();
+    final result = await baseMovieRemoteDataSource.getTopRatedMovies();
     try {
       return Right(result);
     } on ServerException catch (failure) {
