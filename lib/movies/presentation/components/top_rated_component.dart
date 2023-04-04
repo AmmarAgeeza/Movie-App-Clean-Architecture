@@ -15,16 +15,18 @@ class TopRatedComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
+      buildWhen: (previous, current) =>
+          previous.topRatedState != current.topRatedState,
       builder: (context, state) {
         switch (state.topRatedState) {
           case RequestState.loading:
             return const SizedBox(
-              height: 400,
+              height: 170,
               child: Center(child: CircularProgressIndicator()),
             );
           case RequestState.error:
             return SizedBox(
-              height: 400,
+              height: 170,
               child: Center(child: Text(state.nowPlayingMessage)),
             );
 

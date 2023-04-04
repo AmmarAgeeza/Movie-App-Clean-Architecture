@@ -15,11 +15,13 @@ class PopularComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
+      buildWhen: (previous, current) =>
+          previous.popularState != current.popularState,
       builder: (context, state) {
         switch (state.popularState) {
           case RequestState.loading:
             return const SizedBox(
-              height: 400,
+              height: 170,
               child: Center(child: CircularProgressIndicator()),
             );
 
@@ -72,7 +74,7 @@ class PopularComponent extends StatelessWidget {
             );
           case RequestState.error:
             return SizedBox(
-              height: 400,
+              height: 170,
               child: Center(child: Text(state.nowPlayingMessage)),
             );
         }
