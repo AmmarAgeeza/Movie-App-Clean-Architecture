@@ -25,7 +25,7 @@ class NowPlayingComponent extends StatelessWidget {
           case RequestState.error:
             return SizedBox(
               height: 400,
-              child: Center(child: Text(state.message)),
+              child: Center(child: Text(state.nowPlayingMessage)),
             );
           case RequestState.loaded:
             return FadeIn(
@@ -89,9 +89,8 @@ class NowPlayingComponent extends StatelessWidget {
                                       Text(
                                         'Now Playing'.toUpperCase(),
                                         style: const TextStyle(
-                                          fontSize: 16.0,
-                                          color: Colors.white
-                                        ),
+                                            fontSize: 16.0,
+                                            color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -102,10 +101,7 @@ class NowPlayingComponent extends StatelessWidget {
                                     item.title,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
-                                      fontSize: 24,
-                                                                                color: Colors.white
-
-                                    ),
+                                        fontSize: 24, color: Colors.white),
                                   ),
                                 ),
                               ],
