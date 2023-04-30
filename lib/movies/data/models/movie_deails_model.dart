@@ -16,13 +16,13 @@ class MovieDetailsModel extends MovieDetails {
   factory MovieDetailsModel.fromJson(Map jsonData) {
     return MovieDetailsModel(
       id: jsonData['id'],
-      backdropPath: jsonData['backdropPath'],
+      backdropPath: jsonData['backdropPath']??"/nmGWzTLMXy9x7mKd8NKPLmHtWGa.jpg",
       geners:
-          List.from(jsonData['geners'].map((x) => GeneresModel.fromJson(x))),
+          List.from(jsonData['genres'].map((x) => GeneresModel.fromJson(x))),
       overview: jsonData['overview'],
-      releaseData: jsonData['release_data'],
+      releaseData: jsonData['release_date'],
       title: jsonData['title'],
-      voteAverage: jsonData['vote_average'],
+      voteAverage: jsonData['vote_average'].toDouble(),
       runtime: jsonData['runtime'],
     );
   }

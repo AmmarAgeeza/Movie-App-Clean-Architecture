@@ -8,7 +8,7 @@ class MovieDetails extends Equatable {
   final String overview;
   final String releaseData;
   final String title;
-  final String voteAverage;
+  final double voteAverage;
   final int runtime;
 
   const MovieDetails({

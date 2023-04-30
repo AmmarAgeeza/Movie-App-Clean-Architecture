@@ -5,9 +5,10 @@ class RecommendationModel extends Recommendation {
     required super.id,
     required super.backdropPath,
   });
-  factory RecommendationModel.fromJson(Map jsonData){
-    return RecommendationModel(id: jsonData['id'], backdropPath: jsonData['backdrop_path']);
+  factory RecommendationModel.fromJson(Map jsonData) {
+    return RecommendationModel(
+      id: jsonData['id'],
+      backdropPath: jsonData['backdrop_path']??'/nmGWzTLMXy9x7mKd8NKPLmHtWGa.jpg',
+    );
   }
-
-
 }
